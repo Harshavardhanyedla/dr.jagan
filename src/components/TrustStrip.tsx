@@ -46,7 +46,7 @@ export const TrustStrip: React.FC = () => {
   ];
 
   return (
-    <section className="border-y border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 backdrop-blur-sm relative z-20">
+    <section className="border-y border-slate-200/80 dark:border-slate-800 bg-white/70 dark:bg-slate-900/50 backdrop-blur-sm relative z-20 overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
         {/* Responsive layout: Horizontally scrollable on mobile with snap, grid on desktop */}
         <div className="flex md:grid md:grid-cols-5 gap-4 overflow-x-auto pb-2 md:pb-0 scrollbar-none snap-x snap-mandatory">

@@ -33,8 +33,8 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
       className="relative pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/50 dark:from-[#060b13] dark:via-[#091120] dark:to-[#060b13]"
     >
       {/* Background Subtle Ambient Glow */}
-      <div className="absolute top-1/4 -left-48 w-96 h-96 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 -right-48 w-96 h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/4 left-0 w-72 sm:w-96 h-72 sm:h-96 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl pointer-events-none overflow-hidden" />
+      <div className="absolute bottom-10 right-0 w-72 sm:w-96 h-72 sm:h-96 bg-blue-500/10 dark:bg-blue-500/5 rounded-full blur-3xl pointer-events-none overflow-hidden" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -162,31 +162,31 @@ export const Hero: React.FC<HeroProps> = ({ onOpenBooking }) => {
               </div>
 
               {/* Floating Card 1: Live Status "Accepting Appointments" */}
-              <div className="absolute -top-4 -left-4 sm:-left-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-700/80 animate-float-gentle flex items-center gap-3">
-                <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80">
+              <div className="absolute -top-3 left-1 sm:-top-4 sm:-left-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-700/80 animate-float-gentle flex items-center gap-2.5 sm:gap-3 max-w-[calc(100%-16px)]">
+                <div className="relative flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-emerald-50 dark:bg-emerald-950/60 border border-emerald-200 dark:border-emerald-800/80 flex-shrink-0">
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
-                    <CheckCircle2 className="w-3 h-3" />
+                <div className="flex flex-col min-w-0">
+                  <span className="text-[10px] sm:text-[11px] font-semibold text-emerald-700 dark:text-emerald-400 flex items-center gap-1">
+                    <CheckCircle2 className="w-3 h-3 flex-shrink-0" />
                     <span>Live Schedule</span>
                   </span>
-                  <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                  <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
                     {t.acceptingAppointments}
                   </span>
                 </div>
               </div>
 
               {/* Floating Card 2: "Personalized Patient Care" */}
-              <div className="absolute -bottom-6 -right-3 sm:-right-6 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md rounded-2xl p-3 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-700/80 animate-float-delayed flex items-center gap-3">
-                <div className="w-8 h-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center">
+              <div className="absolute -bottom-4 right-1 sm:-bottom-6 sm:-right-6 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md rounded-2xl p-2.5 sm:p-3.5 shadow-xl border border-slate-200/80 dark:border-slate-700/80 animate-float-delayed flex items-center gap-2.5 sm:gap-3 max-w-[calc(100%-16px)]">
+                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-teal-500/10 text-teal-600 dark:text-teal-400 flex items-center justify-center flex-shrink-0">
                   <Sparkles className="w-4 h-4" />
                 </div>
-                <div className="flex flex-col">
-                  <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white">
+                <div className="flex flex-col min-w-0">
+                  <span className="text-xs sm:text-sm font-bold text-slate-900 dark:text-white truncate">
                     {t.personalizedCare}
                   </span>
-                  <span className="text-[11px] text-slate-500 dark:text-slate-400 font-medium">
+                  <span className="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400 font-medium truncate">
                     Evidence-Based Clinical Protocol
                   </span>
                 </div>

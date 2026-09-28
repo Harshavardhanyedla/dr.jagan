@@ -54,7 +54,7 @@ export const TreatmentsSection: React.FC<TreatmentsSectionProps> = ({
   };
 
   return (
-    <section id="treatments" className="py-20 lg:py-28 bg-slate-50/60 dark:bg-[#060b13] relative">
+    <section id="treatments" className="py-20 lg:py-28 bg-slate-50/60 dark:bg-[#060b13] relative overflow-hidden w-full max-w-full">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">

@@ -39,7 +39,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#fbfcfd] dark:bg-[#060b13] transition-colors duration-200">
+    <main className="min-h-screen flex flex-col bg-[#fbfcfd] dark:bg-[#060b13] transition-colors duration-200 overflow-x-hidden w-full max-w-full">
       {/* Sticky Blurred Header */}
       <Navbar onOpenBooking={() => handleOpenBooking()} />
 

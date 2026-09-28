@@ -1,9 +1,19 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Plus_Jakarta_Sans, Outfit } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/language-context";
 import { ThemeProvider } from "@/context/theme-context";
 import { doctorConfig } from "@/config/doctor";
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#060b13" },
+  ],
+};
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -95,14 +105,15 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" suppressHydrationWarning className={`${plusJakarta.variable} ${outfit.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${plusJakarta.variable} ${outfit.variable} overflow-x-hidden`}>
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-screen flex flex-col font-sans selection:bg-teal-500/20 selection:text-teal-900 dark:selection:text-teal-200">
+      <body className="min-h-screen flex flex-col font-sans selection:bg-teal-500/20 selection:text-teal-900 dark:selection:text-teal-200 overflow-x-hidden w-full max-w-full">
         <ThemeProvider>
           <LanguageProvider>
             {children}
