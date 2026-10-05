@@ -7,7 +7,7 @@ import { useLanguage } from "@/context/language-context";
 import {
   Stethoscope,
   Phone,
-  Mail,
+  MessageCircle,
   MapPin,
   ShieldAlert,
   ArrowUp,
@@ -171,12 +171,14 @@ export const Footer: React.FC = () => {
                 </a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="w-4 h-4 text-teal-400 flex-shrink-0" />
+                <MessageCircle className="w-4 h-4 text-emerald-400 flex-shrink-0" />
                 <a
-                  href={`mailto:${doctorConfig.contact.email}`}
+                  href={`https://wa.me/${doctorConfig.contact.whatsapp}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="hover:text-white transition-colors"
                 >
-                  {doctorConfig.contact.email}
+                  WhatsApp: {doctorConfig.contact.displayWhatsapp}
                 </a>
               </div>
               <div className="pt-2">

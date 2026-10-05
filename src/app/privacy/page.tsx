@@ -43,7 +43,7 @@ export default function PrivacyPage() {
             2. Information We Collect
           </h2>
           <p>
-            When submitting an appointment inquiry, we collect your name, phone number, email address, preferred appointment timings, and optional notes concerning your health symptoms. We do not sell, rent, or trade your personal or health data to third-party advertisers.
+            When submitting an appointment inquiry, we collect your name, phone number, preferred appointment timings, and optional notes concerning your health symptoms. We do not sell, rent, or trade your personal or health data to third-party advertisers.
           </p>
         </div>
 

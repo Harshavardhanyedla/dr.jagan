@@ -87,7 +87,6 @@ export default function RootLayout({
     description: doctorConfig.personal.specialization,
     image: "https://drjagan.com/images/dr-jagan.jpg",
     telephone: doctorConfig.contact.phone,
-    email: doctorConfig.contact.email,
     address: {
       "@type": "PostalAddress",
       streetAddress: `${doctorConfig.clinic.address.line1}, ${doctorConfig.clinic.address.line2}`,

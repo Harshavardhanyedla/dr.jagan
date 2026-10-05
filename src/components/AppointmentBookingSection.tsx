@@ -8,7 +8,6 @@ import {
   Clock,
   User,
   Phone,
-  Mail,
   Video,
   Building2,
   FileText,
@@ -30,7 +29,6 @@ interface AppointmentBookingSectionProps {
 interface FormData {
   fullName: string;
   phone: string;
-  email: string;
   date: string;
   timeSlot: string;
   consultationType: "in-clinic" | "online-video";
@@ -54,13 +52,13 @@ export const AppointmentBookingSection: React.FC<AppointmentBookingSectionProps>
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
     phone: "",
-    email: "",
     date: "",
     timeSlot: "",
     consultationType: "in-clinic",
     reason: preselectedTreatment || "",
     notes: "",
   });
+  const [selectedPeriod, setSelectedPeriod] = useState<"all" | "morning" | "evening">("all");
 
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -93,11 +91,7 @@ export const AppointmentBookingSection: React.FC<AppointmentBookingSectionProps>
       newErrors.phone = "Please enter a valid phone number.";
     }
 
-    if (!formData.email.trim()) {
-      newErrors.email = "Please enter your email address.";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email.trim())) {
-      newErrors.email = "Please enter a valid email format.";
-    }
+
 
     if (!formData.date) {
       newErrors.date = "Please select a consultation date.";
@@ -179,7 +173,6 @@ export const AppointmentBookingSection: React.FC<AppointmentBookingSectionProps>
     setFormData({
       fullName: "",
       phone: "",
-      email: "",
       date: "",
       timeSlot: "",
       consultationType: "in-clinic",
@@ -353,7 +346,7 @@ export const AppointmentBookingSection: React.FC<AppointmentBookingSectionProps>
               <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
                 2. Patient Information
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
                   <div className="relative">
                     <User className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
@@ -395,88 +388,158 @@ export const AppointmentBookingSection: React.FC<AppointmentBookingSectionProps>
                     </p>
                   )}
                 </div>
-
-                <div>
-                  <div className="relative">
-                    <Mail className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
-                    <input
-                      type="email"
-                      placeholder={t.emailAddress}
-                      value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    />
-                  </div>
-                  {errors.email && (
-                    <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" />
-                      {errors.email}
-                    </p>
-                  )}
-                </div>
               </div>
             </div>
 
             {/* Date & Time Slot Picker */}
-            <div>
-              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider mb-2">
+            <div className="space-y-4">
+              <label className="block text-xs font-bold text-slate-700 dark:text-slate-300 uppercase tracking-wider">
                 3. Preferred Date & Available Time Slot
               </label>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-3">
-                <div className="sm:col-span-1">
-                  <div className="relative">
-                    <CalendarIcon className="w-4 h-4 text-slate-400 absolute left-3 top-3.5" />
-                    <input
-                      type="date"
-                      min={minDateString}
-                      value={formData.date}
-                      onChange={(e) =>
-                        setFormData({ ...formData, date: e.target.value })
-                      }
-                      className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
-                    />
+
+              <div>
+                <span className="block text-xs font-medium text-slate-600 dark:text-slate-400 mb-1.5">
+                  Select Consultation Date
+                </span>
+                <div className="relative max-w-sm">
+                  <CalendarIcon className="w-4 h-4 text-slate-400 absolute left-3 top-3.5 pointer-events-none" />
+                  <input
+                    type="date"
+                    min={minDateString}
+                    value={formData.date}
+                    onChange={(e) =>
+                      setFormData({ ...formData, date: e.target.value })
+                    }
+                    className="w-full pl-9 pr-3 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-sm text-slate-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  />
+                </div>
+                {errors.date && (
+                  <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.date}
+                  </p>
+                )}
+              </div>
+
+              <div>
+                <div className="flex flex-wrap items-center justify-between gap-2 mb-3">
+                  <div className="flex items-center gap-1.5 text-xs text-slate-700 dark:text-slate-300 font-semibold">
+                    <Clock className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                    <span>Select Time Slot (4 slots per hour • 15 min each):</span>
                   </div>
-                  {errors.date && (
-                    <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" />
-                      {errors.date}
-                    </p>
-                  )}
+
+                  {/* Session Filter Tabs */}
+                  <div className="inline-flex p-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPeriod("all")}
+                      className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                        selectedPeriod === "all"
+                          ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-xs"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      }`}
+                    >
+                      All Slots
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPeriod("morning")}
+                      className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                        selectedPeriod === "morning"
+                          ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-xs"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      }`}
+                    >
+                      Morning (9 AM – 1 PM)
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setSelectedPeriod("evening")}
+                      className={`px-2.5 py-1 rounded-md font-medium transition-colors cursor-pointer ${
+                        selectedPeriod === "evening"
+                          ? "bg-white dark:bg-slate-700 text-teal-600 dark:text-teal-300 shadow-xs"
+                          : "text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white"
+                      }`}
+                    >
+                      Evening (4:30 PM – 8:30 PM)
+                    </button>
+                  </div>
                 </div>
 
-                <div className="sm:col-span-2">
-                  <div className="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 mb-2">
-                    <Clock className="w-3.5 h-3.5" />
-                    <span>Select Time Slot:</span>
+                {formData.timeSlot && (
+                  <div className="mb-3 px-3 py-1.5 rounded-lg bg-teal-50 dark:bg-teal-950/60 border border-teal-200 dark:border-teal-800 text-xs text-teal-800 dark:text-teal-200 inline-flex items-center gap-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-teal-600 dark:text-teal-400" />
+                    <span>Selected Slot: <strong className="font-bold">{formData.timeSlot}</strong></span>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {[
-                      ...doctorConfig.appointmentSlots.morning,
-                      ...doctorConfig.appointmentSlots.evening,
-                    ].map((slot) => (
-                      <button
-                        key={slot}
-                        type="button"
-                        onClick={() => setFormData({ ...formData, timeSlot: slot })}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-colors cursor-pointer ${
-                          formData.timeSlot === slot
-                            ? "bg-teal-600 text-white font-semibold"
-                            : "bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 dark:hover:bg-slate-800"
-                        }`}
-                      >
-                        {slot}
-                      </button>
-                    ))}
+                )}
+
+                {/* Morning Slots */}
+                {(selectedPeriod === "all" || selectedPeriod === "morning") && (
+                  <div className="mb-3 p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40">
+                    <div className="flex items-center justify-between mb-2 text-xs">
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-amber-500" />
+                        Morning Session (09:00 AM – 01:00 PM)
+                      </span>
+                      <span className="text-[11px] text-slate-400 font-medium">4 slots / hour</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {doctorConfig.appointmentSlots.morning.map((slot) => (
+                        <button
+                          key={slot}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, timeSlot: slot })}
+                          className={`py-2 px-2.5 rounded-lg text-xs font-medium text-center transition-all cursor-pointer ${
+                            formData.timeSlot === slot
+                              ? "bg-teal-600 text-white font-bold shadow-md shadow-teal-600/20 scale-[1.02]"
+                              : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-teal-400 hover:bg-slate-50 dark:hover:bg-slate-700/60"
+                          }`}
+                        >
+                          {slot}
+                        </button>
+                      ))}
+                    </div>
                   </div>
-                  {errors.timeSlot && (
-                    <p className="text-xs text-rose-500 mt-1 flex items-center gap-1">
-                      <AlertCircle className="w-3 h-3" />
-                      {errors.timeSlot}
-                    </p>
-                  )}
-                </div>
+                )}
+
+                {/* Evening Slots */}
+                {(selectedPeriod === "all" || selectedPeriod === "evening") && (
+                  <div className="p-3.5 rounded-xl border border-slate-200/80 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/40">
+                    <div className="flex items-center justify-between mb-2 text-xs">
+                      <span className="font-semibold text-slate-800 dark:text-slate-200 flex items-center gap-1.5">
+                        <span className="w-2 h-2 rounded-full bg-indigo-500" />
+                        Afternoon & Evening Session (04:30 PM – 08:30 PM)
+                      </span>
+                      <span className="text-[11px] text-slate-400 font-medium">4 slots / hour</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {[
+                        ...doctorConfig.appointmentSlots.afternoon,
+                        ...doctorConfig.appointmentSlots.evening,
+                      ].map((slot) => (
+                        <button
+                          key={slot}
+                          type="button"
+                          onClick={() => setFormData({ ...formData, timeSlot: slot })}
+                          className={`py-2 px-2.5 rounded-lg text-xs font-medium text-center transition-all cursor-pointer ${
+                            formData.timeSlot === slot
+                              ? "bg-teal-600 text-white font-bold shadow-md shadow-teal-600/20 scale-[1.02]"
+                              : "bg-white dark:bg-slate-800 text-slate-700 dark:text-slate-300 border border-slate-200 dark:border-slate-700 hover:border-teal-400 hover:bg-slate-50 dark:hover:bg-slate-700/60"
+                          }`}
+                        >
+                          {slot}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {errors.timeSlot && (
+                  <p className="text-xs text-rose-500 mt-2 flex items-center gap-1">
+                    <AlertCircle className="w-3 h-3" />
+                    {errors.timeSlot}
+                  </p>
+                )}
               </div>
             </div>
 

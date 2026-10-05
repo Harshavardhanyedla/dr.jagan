@@ -7,7 +7,7 @@ import {
   MapPin,
   Clock,
   Phone,
-  Mail,
+  MessageCircle,
   Navigation,
   Building,
   CheckCircle2,
@@ -105,13 +105,15 @@ export const ClinicLocationSection: React.FC = () => {
                 </a>
 
                 <a
-                  href={`mailto:${doctorConfig.contact.email}`}
+                  href={`https://wa.me/${doctorConfig.contact.whatsapp}?text=Hello%20Clinic`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2.5 p-3 rounded-xl bg-slate-50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors text-slate-700 dark:text-slate-200"
                 >
-                  <Mail className="w-4 h-4 text-teal-600 dark:text-teal-400" />
+                  <MessageCircle className="w-4 h-4 text-emerald-600 dark:text-emerald-400" />
                   <div>
-                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">Email Inquiries</span>
-                    <span className="font-bold">{doctorConfig.contact.email}</span>
+                    <span className="text-[10px] text-slate-400 uppercase font-semibold block">WhatsApp Desk</span>
+                    <span className="font-bold">{doctorConfig.contact.displayWhatsapp}</span>
                   </div>
                 </a>
               </div>

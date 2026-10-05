@@ -49,7 +49,7 @@ export interface DoctorConfig {
     displayPhone: string;
     whatsapp: string;
     displayWhatsapp: string;
-    email: string;
+    email?: string;
     emergencyContact: string;
   };
   clinic: {
@@ -157,7 +157,7 @@ export const doctorConfig: DoctorConfig = {
     displayPhone: "+91 95507 93263",
     whatsapp: "919550793263",
     displayWhatsapp: "+91 95507 93263",
-    email: "consult@drjaganclinic.com",
+    email: "",
     emergencyContact: "+91 95507 93263 (Emergency / Reception Desk)",
   },
   clinic: {
@@ -176,13 +176,13 @@ export const doctorConfig: DoctorConfig = {
       landmark: "[Opposite Central Garden / Near Medical Metro Station]",
     },
     timings: [
-      { day: "Monday", hours: "[09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM]", isOpen: true },
-      { day: "Tuesday", hours: "[09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM]", isOpen: true },
-      { day: "Wednesday", hours: "[09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM]", isOpen: true },
-      { day: "Thursday", hours: "[09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM]", isOpen: true },
-      { day: "Friday", hours: "[09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM]", isOpen: true },
-      { day: "Saturday", hours: "[09:00 AM – 02:00 PM]", isOpen: true },
-      { day: "Sunday", hours: "[Closed / By Prior Emergency Appointment]", isOpen: false },
+      { day: "Monday", hours: "09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM", isOpen: true },
+      { day: "Tuesday", hours: "09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM", isOpen: true },
+      { day: "Wednesday", hours: "09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM", isOpen: true },
+      { day: "Thursday", hours: "09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM", isOpen: true },
+      { day: "Friday", hours: "09:00 AM – 01:00 PM, 04:30 PM – 08:30 PM", isOpen: true },
+      { day: "Saturday", hours: "09:00 AM – 02:00 PM", isOpen: true },
+      { day: "Sunday", hours: "Closed / By Prior Emergency Appointment", isOpen: false },
     ],
   },
   about: {
@@ -663,9 +663,44 @@ export const doctorConfig: DoctorConfig = {
     },
   ],
   appointmentSlots: {
-    morning: ["09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM", "11:00 AM", "11:30 AM", "12:00 PM"],
-    afternoon: ["04:30 PM", "05:00 PM", "05:30 PM", "06:00 PM"],
-    evening: ["06:30 PM", "07:00 PM", "07:30 PM", "08:00 PM"],
+    morning: [
+      "09:00 AM",
+      "09:15 AM",
+      "09:30 AM",
+      "09:45 AM",
+      "10:00 AM",
+      "10:15 AM",
+      "10:30 AM",
+      "10:45 AM",
+      "11:00 AM",
+      "11:15 AM",
+      "11:30 AM",
+      "11:45 AM",
+      "12:00 PM",
+      "12:15 PM",
+      "12:30 PM",
+      "12:45 PM",
+    ],
+    afternoon: [
+      "04:30 PM",
+      "04:45 PM",
+      "05:00 PM",
+      "05:15 PM",
+      "05:30 PM",
+      "05:45 PM",
+    ],
+    evening: [
+      "06:00 PM",
+      "06:15 PM",
+      "06:30 PM",
+      "06:45 PM",
+      "07:00 PM",
+      "07:15 PM",
+      "07:30 PM",
+      "07:45 PM",
+      "08:00 PM",
+      "08:15 PM",
+    ],
   },
   disclaimer: "Medical Disclaimer: The information provided on this website is for general educational and informational purposes only. It does not establish a doctor-patient relationship and must not be used as a substitute for professional medical diagnosis, advice, or treatment. Always consult Dr. Jagan or a certified healthcare provider regarding any health condition or medical emergency.",
 };
